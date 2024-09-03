@@ -37,5 +37,30 @@ namespace MVCCodigoCapas2024.Controllers
 
             return View(model);
         }
+
+        public  IActionResult IndexAjax()
+        {
+            return View();
+        }
+
+        [HttpGet] // Decorador para manejar solicitudes GET
+        public IActionResult GetProducts()
+        {
+            var products = _service.Get();
+
+            //Lista de modelos
+            var model = products.Select(x => new ProductModel
+            {
+                Id = x.ProductID,
+                Name = x.Name,
+                Price = x.Price
+            }).ToList();
+
+
+
+            return Json(model);
+        }
+
+
     }
 }

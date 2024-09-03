@@ -1,0 +1,54 @@
+﻿<h2>Lista de Cursos</h2>
+
+<button id="listProductsButton" class="btn btn-primary">Listar Productos</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Price</th>            
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Aquí se llenará la tabla con los estudiantes -->
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#listProductsButton').click(function () {
+
+            $.ajax({
+                type: "GET",
+                url: "/Products/GetProducts",
+                success: function (products) {
+                    console.log(products);
+
+                    var tableBody = $('table tbody');
+                    tableBody.empty(); // Vaciar la tabla
+
+                    products.forEach(function (product) {
+                        var newRow = `
+                                    <tr>
+                                                <td>${product.id}</td>
+                                                <td>${product.name}</td>
+                                                <td>${product.price}</td>
+                                    </tr>`;
+                        tableBody.append(newRow);
+                    });
+
+                },
+                error: function () {
+                    alert('Hubo un error al listar los alimentos.');
+                }
+            });
+
+        });
+
+    });
+
+</script>
