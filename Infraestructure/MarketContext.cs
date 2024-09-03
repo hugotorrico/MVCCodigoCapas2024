@@ -16,5 +16,7 @@ namespace Infraestructure
         public MarketContext(DbContextOptions<MarketContext> options) : base(options)
         {
         }
+
+       
     }
 }

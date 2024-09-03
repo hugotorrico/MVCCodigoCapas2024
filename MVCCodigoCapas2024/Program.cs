@@ -1,7 +1,23 @@
+using Infraestructure;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+
+builder.Services.AddDbContext<MarketContext>(
+    options =>
+    {
+        options.UseSqlServer("Data Source=DESKTOP-BCQFL9J\\SQLEXPRESS;" +
+            "Initial Catalog=CodigoCapasMVCDB;User ID=userCodigo;Pwd=123456;" +
+            "TrustServerCertificate=True");
+       
+    });
+
+
 
 var app = builder.Build();
 
